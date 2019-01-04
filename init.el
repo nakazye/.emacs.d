@@ -10,6 +10,23 @@
 (setq debug-on-error t)
 
 ;===================================
+; package manager: straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;===================================
 ; language setting
 (set-language-environment 'Japanese)
 (set-default-coding-systems 'utf-8)
@@ -20,8 +37,14 @@
 (define-key global-map [?¥] [?\\])
 
 ;===================================
+; color-theme-modern
+(use-package color-theme-modern)
+(load-theme 'euphoria t t)
+(enable-theme 'euphoria)
+
+;===================================
 ; font setting
-(add-to-list 'default-frame-alist '(font . "Myrica M"))
+(add-to-list 'default-frame-alist '(font . "Myrica M-16"))
 
 ;===================================
 ; current directry setting
@@ -85,29 +108,7 @@
       '(("." . "~/.emacs.d/var/backup/")))
 (setq auto-save-list-file-prefix "~/.emacs.d/var/auto-save-list/.saves-")
 
-;===================================
-; package manager: straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
-
 ;########################################
 ; package settings
 ;########################################
 
-;===================================
-; color-theme-modern
-(use-package color-theme-modern)
-(load-theme 'euphoria t t)
-(enable-theme 'euphoria)
