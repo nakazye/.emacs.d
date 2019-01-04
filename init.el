@@ -99,9 +99,15 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
-
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;########################################
 ; package settings
 ;########################################
 
+;===================================
+; color-theme-modern
+(use-package color-theme-modern)
+(load-theme 'euphoria t t)
+(enable-theme 'euphoria)
