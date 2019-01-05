@@ -1,5 +1,5 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-emacs-unix; indent-tabs-mode: nil -*-
-;;; init.el -- Emacs init setting elisp file
+;;; init.el --- Emacs init setting elisp file
 
 ;########################################
 ; general settings
@@ -112,3 +112,14 @@
 ; package settings
 ;########################################
 
+;===================================
+; flycheck
+(use-package flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;===================================
+; flycheck-pos-tip
+(use-package flycheck-pos-tip)
+(eval-after-load 'flycheck
+  '(custom-set-variables
+   '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
