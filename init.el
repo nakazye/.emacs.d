@@ -123,3 +123,9 @@
 (eval-after-load 'flycheck
   '(custom-set-variables
    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+
+;===================================
+; git-gutter
+(use-package git-gutter)
+(global-git-gutter-mode +1)
+
