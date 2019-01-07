@@ -129,3 +129,11 @@
 (use-package git-gutter)
 (global-git-gutter-mode +1)
 
+;===================================
+; highlight-symbol
+(use-package highlight-symbol)
+(setq highlight-symbol-idle-delay 1.0) ; 1秒後自動ハイライト
+(add-hook 'prog-mode-hook 'highlight-symbol-mode) ; 自動ハイライト
+(add-hook 'prog-mode-hook 'highlight-symbol-nav-mode) ; ソースコードでM-p/M-nシンボル間移動
+(global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace) ; シンボル置換
+
