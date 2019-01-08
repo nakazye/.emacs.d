@@ -80,6 +80,7 @@
 ; line num and column num
 (line-number-mode t)
 (column-number-mode t)
+(global-display-line-numbers-mode t)
 
 ;===================================
 ; tab as 4 sapaces
