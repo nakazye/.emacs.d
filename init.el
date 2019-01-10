@@ -37,6 +37,19 @@
 (define-key global-map [?¥] [?\\])
 
 ;===================================
+; IME setting
+(when (eq window-system 'w32) ; windows
+  (global-set-key [M-kanji] 'toggle-input-method) ; for us keyboard
+  )
+;; minibuffer に入った時、IME を OFF にする
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (deactivate-input-method)))
+(add-hook 'helm-minibuffer-set-up-hook
+          (lambda ()
+            (deactivate-input-method)))
+
+;===================================
 ; color-theme-modern
 (use-package color-theme-modern)
 (load-theme 'euphoria t t)
@@ -138,3 +151,7 @@
 (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode) ; ソースコードでM-p/M-nシンボル間移動
 (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace) ; シンボル置換
 
+;===================================
+; adoc-mode
+(use-package adoc-mode)
+(autoload 'adoc-mode "adoc-mode" nil t)
