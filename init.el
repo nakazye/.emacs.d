@@ -139,6 +139,17 @@
    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 ;===================================
+; auto-complete
+(use-package auto-complete)
+(ac-config-default)
+(global-auto-complete-mode t)
+(ac-set-trigger-key "TAB")
+;(setq ac-auto-start nil) ; 自動表示の禁止
+(defvar ac-use-menu-map t) ; use M-n/M-p
+(defvar ac-use-fuzzy t)
+(setq ac-dwim t)  ; 空気読んでほしい
+
+;===================================
 ; git-gutter
 (use-package git-gutter)
 (global-git-gutter-mode +1)
