@@ -163,6 +163,13 @@
 (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace) ; シンボル置換
 
 ;===================================
+; multiple-coursors
+(use-package multiple-cursors)
+(global-set-key (kbd "<C-M-return>") 'mc/edit-lines)
+(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+(setq mc/list-file "~/.emacs.d/var/mc-lists.el")
+
+;===================================
 ; adoc-mode
 (use-package adoc-mode)
 (autoload 'adoc-mode "adoc-mode" nil t)
