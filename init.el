@@ -51,9 +51,10 @@
 
 ;===================================
 ; color-theme-modern
-(use-package color-theme-modern)
-(load-theme 'euphoria t t)
-(enable-theme 'euphoria)
+(use-package color-theme-modern
+  :config
+  (load-theme 'euphoria t t)
+  (enable-theme 'euphoria))
 
 ;===================================
 ; font setting
@@ -128,34 +129,38 @@
 
 ;===================================
 ; flycheck
-(use-package flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package flycheck
+  :init (global-flycheck-mode))
+
 ; flycheck-pos-tip
-(use-package flycheck-pos-tip)
-(eval-after-load 'flycheck
-  '(custom-set-variables
-   '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+(use-package flycheck-pos-tip
+  :hook (flycheck-mode . flycheck-pos-tip-mode)
+  :config
+  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 
 ;===================================
 ; company-mode
-(use-package company)
-(global-company-mode +1)
-(global-set-key (kbd "C-M-i") 'company-complete)
-;; C-n, C-pで補完候補を次/前の候補を選択
-(define-key company-active-map (kbd "C-n") 'company-select-next)
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
-(define-key company-search-map (kbd "C-n") 'company-select-next)
-(define-key company-search-map (kbd "C-p") 'company-select-previous)
-;; C-sで絞り込む
-(define-key company-active-map (kbd "C-s") 'company-filter-candidates)
-;; TABで候補を設定
-(define-key company-active-map (kbd "C-i") 'company-complete-selection)
-;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
-(define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete)
+(use-package company
+  :config
+  (global-company-mode +1)
+  (push 'company-lsp company-backends)
+  (global-set-key (kbd "C-M-i") 'company-complete)
+  ;; C-n, C-pで補完候補を次/前の候補を選択
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-search-map (kbd "C-n") 'company-select-next)
+  (define-key company-search-map (kbd "C-p") 'company-select-previous)
+  ;; C-sで絞り込む
+  (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
+  ;; TABで候補を設定
+  (define-key company-active-map (kbd "C-i") 'company-complete-selection)
+  ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+  (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete))
 
 ; company-quickhelp
-(use-package company-quickhelp)
-(company-quickhelp-mode +1)
+(use-package company-quickhelp
+  :config
+  (company-quickhelp-mode +1))
 
 ;===================================
 ; lsp-mode
@@ -164,11 +169,13 @@
          (lsp-message-project-root-warning t)
          (create-lockfiles nil))
   :hook   (prog-major-mode . lsp-prog-major-mode-enable))
+
 ; lsp-ui
 (use-package lsp-ui
   :after lsp-mode
   :custom (scroll-margin 0)
   :hook   (lsp-mode . lsp-ui-mode))
+
 ; company-lsp
 (use-package company-lsp
   :after (lsp-mode company yasnippet)
@@ -178,25 +185,40 @@
 
 ;===================================
 ; git-gutter
-(use-package git-gutter)
-(global-git-gutter-mode +1)
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode +1)
+  )
 
 ;===================================
 ; highlight-symbol
-(use-package highlight-symbol)
-(setq highlight-symbol-idle-delay 1.0) ; 1秒後自動ハイライト
-(add-hook 'prog-mode-hook 'highlight-symbol-mode) ; 自動ハイライト
-(add-hook 'prog-mode-hook 'highlight-symbol-nav-mode) ; ソースコードでM-p/M-nシンボル間移動
-(global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace) ; シンボル置換
+(use-package highlight-symbol
+  :config
+  (setq highlight-symbol-idle-delay 1.0) ; 1秒後自動ハイライト
+  :hook
+  (prog-mode . highlight-symbol-mode) ; 自動ハイライト
+  (prog-mode . highlight-symbol-nav-mode) ; ソースコードでM-p/M-nシンボル間移動
+  :bind
+  (("M-s M-r" . highlight-symbol-query-replace)) ; シンボル置換
+  )
 
 ;===================================
 ; multiple-coursors
-(use-package multiple-cursors)
-(global-set-key (kbd "<C-M-return>") 'mc/edit-lines)
-(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
-(setq mc/list-file "~/.emacs.d/var/mc-lists.el")
+(use-package multiple-cursors
+  :config
+  (setq mc/list-file "~/.emacs.d/var/mc-lists.el")
+  :bind
+  (("<C-M-return>" . mc/edit-lines)
+   ("C-*" . mc/mark-all-like-this)))
+
+;===================================
+; python-mode
+(use-package python-mode
+  :config
+  (add-hook 'python-mode-hook #'lsp))
 
 ;===================================
 ; adoc-mode
-(use-package adoc-mode)
-(autoload 'adoc-mode "adoc-mode" nil t)
+(use-package adoc-mode
+  :mode
+  (("\\.adoc?\\'" . adoc-mode)))
