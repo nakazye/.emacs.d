@@ -130,8 +130,6 @@
 ; flycheck
 (use-package flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
-
-;===================================
 ; flycheck-pos-tip
 (use-package flycheck-pos-tip)
 (eval-after-load 'flycheck
@@ -139,15 +137,44 @@
    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 ;===================================
-; auto-complete
-(use-package auto-complete)
-(ac-config-default)
-(global-auto-complete-mode t)
-(ac-set-trigger-key "TAB")
-;(setq ac-auto-start nil) ; 自動表示の禁止
-(defvar ac-use-menu-map t) ; use M-n/M-p
-(defvar ac-use-fuzzy t)
-(setq ac-dwim t)  ; 空気読んでほしい
+; company-mode
+(use-package company)
+(global-company-mode +1)
+(global-set-key (kbd "C-M-i") 'company-complete)
+;; C-n, C-pで補完候補を次/前の候補を選択
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-search-map (kbd "C-n") 'company-select-next)
+(define-key company-search-map (kbd "C-p") 'company-select-previous)
+;; C-sで絞り込む
+(define-key company-active-map (kbd "C-s") 'company-filter-candidates)
+;; TABで候補を設定
+(define-key company-active-map (kbd "C-i") 'company-complete-selection)
+;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+(define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete)
+
+; company-quickhelp
+(use-package company-quickhelp)
+(company-quickhelp-mode +1)
+
+;===================================
+; lsp-mode
+(use-package lsp-mode
+  :custom ((lsp-inhibit-message t)
+         (lsp-message-project-root-warning t)
+         (create-lockfiles nil))
+  :hook   (prog-major-mode . lsp-prog-major-mode-enable))
+; lsp-ui
+(use-package lsp-ui
+  :after lsp-mode
+  :custom (scroll-margin 0)
+  :hook   (lsp-mode . lsp-ui-mode))
+; company-lsp
+(use-package company-lsp
+  :after (lsp-mode company yasnippet)
+  :defines company-backends
+  :functions company-backend-with-yas
+  :init (cl-pushnew (company-backend-with-yas 'company-lsp) company-backends))
 
 ;===================================
 ; git-gutter
