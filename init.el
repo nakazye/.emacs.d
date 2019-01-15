@@ -215,6 +215,8 @@
 ; python-mode
 (use-package python-mode
   :config
+  (setq py-python-command "python3")
+  (setq python-shell-interpreter "python3")
   (add-hook 'python-mode-hook #'lsp))
 
 ;===================================
