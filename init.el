@@ -165,10 +165,12 @@
 ;===================================
 ; lsp-mode
 (use-package lsp-mode
-  :custom ((lsp-inhibit-message t)
-         (lsp-message-project-root-warning t)
-         (create-lockfiles nil))
-  :hook   (prog-major-mode . lsp-prog-major-mode-enable))
+  :custom
+  ((lsp-inhibit-message t)
+   (lsp-message-project-root-warning t)
+   (create-lockfiles nil))
+  :hook
+  (prog-major-mode . lsp-prog-major-mode-enable))
 
 ; lsp-ui
 (use-package lsp-ui
@@ -213,11 +215,21 @@
 
 ;===================================
 ; python-mode
+; TODO 今のところMacかそれ以外かという感じか。後で直す
 (use-package python-mode
+  :if
+  (eq window-system 'ns) ; mac
   :config
   (setq py-python-command "python3")
   (setq python-shell-interpreter "python3")
   (add-hook 'python-mode-hook #'lsp))
+(use-package python-mode
+  :if
+  (eq window-system 'windows-nt) ; win
+  :config
+  (add-hook 'python-mode-hook #'lsp)
+  (setq py-python-command "python")
+  (setq python-shell-interpreter "python"))
 
 ;===================================
 ; adoc-mode
