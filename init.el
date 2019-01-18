@@ -215,7 +215,6 @@
 
 ;===================================
 ; python-mode
-; TODO 今のところMacかそれ以外かという感じか。後で直す
 (use-package python-mode
   :if
   (eq window-system 'ns) ; mac
@@ -224,8 +223,8 @@
   (setq python-shell-interpreter "python3")
   (add-hook 'python-mode-hook #'lsp))
 (use-package python-mode
-  :if
-  (eq window-system 'windows-nt) ; win
+  :unless
+  (eq window-system 'ns) ; win
   :config
   (add-hook 'python-mode-hook #'lsp)
   (setq py-python-command "python")
