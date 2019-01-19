@@ -163,6 +163,22 @@
   (company-quickhelp-mode +1))
 
 ;===================================
+; counsel & swiper & ivy
+(use-package counsel
+  :config
+  (ivy-mode 1)
+  (counsel-mode 1)
+  :bind
+  (("\C-s" . 'swiper)
+   ("C-c C-r" . 'ivy-resume)
+   ("C-c g" . 'counsel-git)
+   ("C-c j" . 'counsel-git-grep)
+   ("C-c k" . 'counsel-ag)
+   ("C-x l" . 'counsel-locate)
+   ("C-S-o" . 'counsel-rhythmbox)
+  ))
+
+;===================================
 ; lsp-mode
 (use-package lsp-mode
   :custom
@@ -235,3 +251,4 @@
 (use-package adoc-mode
   :mode
   (("\\.adoc?\\'" . adoc-mode)))
+
