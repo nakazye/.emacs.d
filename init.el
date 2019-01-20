@@ -179,6 +179,18 @@
   ))
 
 ;===================================
+; dumb-jump
+(use-package dumb-jump
+  :config
+  (setq dumb-jump-mode t)
+  (setq dumb-jump-selector 'ivy)
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g i" . dumb-jump-go-prompt)
+         ("M-g x" . dumb-jump-go-prefer-external)
+         ("M-g z" . dumb-jump-go-prefer-external-other-window)))
+
+;===================================
 ; lsp-mode
 (use-package lsp-mode
   :custom
