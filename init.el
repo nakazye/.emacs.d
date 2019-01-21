@@ -191,6 +191,12 @@
          ("M-g z" . dumb-jump-go-prefer-external-other-window)))
 
 ;===================================
+; rainbow-delimiters
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;===================================
 ; lsp-mode
 (use-package lsp-mode
   :custom
