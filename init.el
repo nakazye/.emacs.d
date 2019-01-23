@@ -265,6 +265,16 @@
   (setq python-shell-interpreter "python"))
 
 ;===================================
+; markdown-mode
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+;===================================
 ; adoc-mode
 (use-package adoc-mode
   :mode
