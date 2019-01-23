@@ -265,14 +265,16 @@
   (setq python-shell-interpreter "python"))
 
 ;===================================
+; edit-indirect
+(use-package edit-indirect)
+
+;===================================
 ; markdown-mode
 (use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :mode (("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . gfm-mode))
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
 
 ;===================================
 ; adoc-mode
