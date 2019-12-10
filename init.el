@@ -50,11 +50,40 @@
             (deactivate-input-method)))
 
 ;===================================
-; color-theme-modern
-(use-package color-theme-modern
-  :config
-  (load-theme 'euphoria t t)
-  (enable-theme 'euphoria))
+; color-theme
+ (use-package doom-themes
+    :custom
+    (doom-themes-enable-italic t)
+    (doom-themes-enable-bold t)
+    :custom-face
+    (doom-modeline-bar ((t (:background "#6272a4"))))
+    :config
+    (load-theme 'doom-dracula t)
+    (doom-themes-neotree-config)
+    (doom-themes-org-config))
+
+;===================================
+; modeline-theme
+(use-package nyan-mode
+   :custom
+   (nyan-cat-face-number 4)
+   (nyan-animate-nyancat t)
+   :hook
+   (doom-modeline-mode . nyan-mode))
+(use-package doom-modeline
+      :custom
+      (doom-modeline-buffer-file-name-style 'truncate-with-project)
+      (doom-modeline-icon t)
+      (doom-modeline-major-mode-icon nil)
+      (doom-modeline-minor-modes nil)
+      :hook
+      (after-init . doom-modeline-mode)
+      :config
+      (line-number-mode 0)
+      (column-number-mode 0)
+      (doom-modeline-def-modeline 'main
+    '(bar  window-number matches buffer-info remote-host buffer-position parrot selection-info)
+    '(misc-info persp-name lsp github debug minor-modes input-method major-mode process vcs checker)))
 
 ;===================================
 ; font setting
