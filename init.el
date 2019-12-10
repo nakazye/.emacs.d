@@ -110,6 +110,13 @@
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 
 ;===================================
+; show keymap
+(use-package which-key
+  :diminish which-key-mode
+  :hook (after-init . which-key-mode))
+(use-package amx)
+
+;===================================
 ; paren mode
 (show-paren-mode t)
 
