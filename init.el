@@ -105,9 +105,9 @@
 
 ;===================================
 ; back space with C-h
-(global-set-key "\M-?" 'help-for-help)
-(global-set-key "\C-h" 'backward-delete-char)
-(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
+(bind-key "\M-?" 'help-for-help)
+(bind-key "C-h" 'delete-backward-char)
+
 
 ;===================================
 ; show keymap
