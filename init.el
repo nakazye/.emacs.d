@@ -1,4 +1,3 @@
-;;; -*- mode: emacs-lisp; coding: utf-8-emacs-unix; indent-tabs-mode: nil -*-
 ;;; init.el --- Emacs init setting elisp file
 
 ;########################################
@@ -231,6 +230,18 @@
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;===================================
+; highlight indent guides
+(use-package highlight-indent-guides
+    :diminish
+    :hook
+    ((prog-mode yaml-mode) . highlight-indent-guides-mode)
+    :custom
+    (highlight-indent-guides-auto-enabled t)
+    (highlight-indent-guides-responsive t)
+    (highlight-indent-guides-method 'character)) ; column
+
 
 ;===================================
 ; lsp-mode
