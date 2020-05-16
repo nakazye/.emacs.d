@@ -83,6 +83,10 @@
       (doom-modeline-def-modeline 'main
     '(bar  window-number matches buffer-info remote-host buffer-position parrot selection-info)
     '(misc-info persp-name lsp github minor-modes input-method major-mode process vcs checker)))
+(use-package all-the-icons
+  :custom
+  (all-the-icons-scale-factor 1.0))
+;;; when setup, execute "M-x all-the-icons-install-fonts"
 
 ;===================================
 ; font setting
