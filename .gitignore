@@ -8,3 +8,5 @@ var/
 jdee-server/
 url/
 straight/
+auto-save-list/
+backup/
