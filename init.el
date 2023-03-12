@@ -160,6 +160,36 @@
 	    :config
 	    (add-to-list 'company-backends 'company-c-headers)))
 
+;;; --------------------------------------
+
+(leaf org
+  :doc "org-mode settings"
+  :ensure t
+  :bind (("C-c c" . org-capture)
+	 ("C-c a" . org-agenda)
+	 ("C-c l" . org-store-link)
+	 ("C-c j" . org-journal-new-entry))
+  :setq
+  (org-capture-templates
+   . '(
+       ("t" "Task w/o due"
+	entry (file+headline "~/org/inbox.org" "Tasks") "** TODO %? \n")
+       ("d" "Task w/ due"
+	entry (file+headline "~/org/inbox.org" "Tasks") "** TODO %? \n   DEADLINE: %^t \n")
+       ("m" "Memo"
+	entry (file+headline "~/org/inbox.org" "Memo") "** %? \n")
+       ))
+  (org-agenda-files . '("~/org/"))
+  :config
+  (leaf org-journal
+    :doc "org-journal settings"
+    :ensure t
+    :setq
+    (org-journal-dir . "~/org/")
+    (org-journal-date-format . "%Y-%m-%d, %A")
+    (org-journal-file-format . "journal-%Y%m%d.org"))
+  )
+
 
 (provide 'init)
 
