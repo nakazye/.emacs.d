@@ -1,4 +1,9 @@
-;;; early-init.el -*- lexical-binding: t; -*-
+;;; early-init.el --- Early initialization file for Emacs -*- lexical-binding: t -*-
+
+;;; Commentary:
+;;; Emacs Startup File
+
+;;; code:
 
 ;; ===================================
 ;;  debug on error

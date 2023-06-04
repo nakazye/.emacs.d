@@ -5,6 +5,18 @@
 
 ;;; code:
 
+(leaf lang-setting
+  :doc "langage setting"
+  :config
+  (set-language-environment  "Japanese")
+  (prefer-coding-system  'utf-8)
+  (set-file-name-coding-system  'utf-8)
+  (set-keyboard-coding-system  'utf-8)
+  (set-terminal-coding-system  'utf-8)
+  (set-default 'buffer-file-coding-system 'utf-8))
+
+;;; --------------------------------------
+
 (leaf font-setting
   :doc "font setting"
   :when (member "Myrica M" (font-family-list))
@@ -54,8 +66,6 @@
 
 (leaf which-key
   :doc "Display available keybindings in popup"
-  :tag "emacs>=24.4"
-  :emacs>= 24.4
   :ensure t
   :config
   (which-key-mode)
@@ -65,8 +75,6 @@
 
 (leaf ivy
   :doc "Incremental Vertical completYon"
-  :req "emacs-24.5"
-  :emacs>= 24.5
   :ensure t
   :blackout t
   :leaf-defer nil
@@ -76,15 +84,11 @@
   :config
   (leaf swiper
     :doc "Isearch with an overview. Oh, man!"
-    :req "emacs-24.5" "ivy-0.13.0"
-    :emacs>= 24.5
     :ensure t
     :bind (("C-s" . swiper))
     :config
     (leaf counsel
       :doc "Various completion functions using Ivy"
-      :req "emacs-24.5" "swiper-0.13.0"
-      :emacs>= 24.5
       :ensure t
       :blackout t
       :bind (("C-S-s" . counsel-imenu)
@@ -97,16 +101,12 @@
 
 (leaf prescient
   :doc "Better sorting and filtering"
-  :req "emacs-25.1"
-  :emacs>= 25.1
   :ensure t
   :custom ((prescient-aggressive-file-save . t))
   :global-minor-mode prescient-persist-mode
   :config
   (leaf ivy-prescient
     :doc "prescient.el + Ivy"
-    :req "emacs-25.1" "prescient-4.0" "ivy-0.11.0"
-    :emacs>= 25.1
     :ensure t
     :after prescient ivy
     :custom ((ivy-prescient-retain-classic-highlighting . t))
@@ -116,10 +116,6 @@
 
 (leaf flycheck
   :doc "On-the-fly syntax checking"
-  :req "dash-2.12.1" "pkg-info-0.4" "let-alist-1.0.4" "seq-1.11" "emacs-24.3"
-  :tag "minor-mode" "tools" "languages" "convenience" "emacs>=24.3"
-  :url "http://www.flycheck.org"
-  :emacs>= 24.3
   :ensure t
   :bind (("M-n" . flycheck-next-error)
          ("M-p" . flycheck-previous-error))
@@ -129,8 +125,6 @@
 
 (leaf company
   :doc "Modular text completion framework"
-  :req "emacs-24.3"
-  :emacs>= 24.3
   :ensure t
   :blackout t
   :leaf-defer nil
@@ -150,10 +144,6 @@
   :global-minor-mode global-company-mode
   :config (leaf company-c-headers
 	    :doc "Company mode backend for C/C++ header files"
-	    :req "emacs-24.1" "company-0.8"
-	    :tag "company" "development" "emacs>=24.1"
-	    :added "2020-03-25"
-	    :emacs>= 24.1
 	    :ensure t
 	    :after company
 	    :defvar company-backends
