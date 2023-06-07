@@ -176,6 +176,7 @@
     :ensure t
     :setq
     (org-journal-dir . "~/org/")
+    (org-journal-file-type . 'monthly)
     (org-journal-date-format . "%Y-%m-%d, %A")
     (org-journal-file-format . "journal-%Y%m%d.org"))
   )
