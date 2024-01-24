@@ -11,7 +11,16 @@
 
 ;; ===================================
 ;; silent
-(set-message-beep 'silent)
+(cond
+ ((string-equal system-type "windows-nt") ; Windows
+  (progn
+    (set-message-beep 'silent)))
+ ((string-equal system-type "gnu/linux") ; Linux
+  (progn
+    (setq visible-bell t)))
+ ((string-equal system-type "darwin") ; mac
+  (progn
+    (setq visible-bell t))))
 (setq ring-bell-function 'ignore)
 
 ;; ===================================

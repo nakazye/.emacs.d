@@ -28,13 +28,14 @@
 (leaf modus-themes
   :doc "theme setting"
   :ensure t
+  :init
+  (load-theme 'modus-operandi :no-confirm)
+  (modus-themes-toggle)
   :custom
   `((modus-themes-italic-constructs . t)
     (modus-themes-bold-constructs   . nil)
     (modus-themes-region            . '(bg-only no-extend)))
-  :config
-  (eval-when-compile
-    (require 'modus-themes)))
+  )
 
 ;;; --------------------------------------
 
