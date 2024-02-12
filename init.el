@@ -25,6 +25,23 @@
 
 ;;; --------------------------------------
 
+(leaf skk
+  :doc "IME"
+  :ensure ddskk
+  :require t skk-study skk-hint
+  :bind (("C-x j" . skk-auto-fill-mode)))
+(prog1 'skk
+  (autoload (function skk-auto-fill-mode) "skk" nil t)
+  (leaf-handler-package skk ddskk nil)
+  (leaf-keys (("C-x j" . skk-auto-fill-mode)))
+  (eval-after-load 'skk
+    '(progn
+       (require 'skk)
+       (require 'skk-study)
+       (require 'skk-hint))))
+
+;;; --------------------------------------
+
 (leaf modus-themes
   :doc "theme setting"
   :ensure t
@@ -77,7 +94,6 @@
 (leaf ivy
   :doc "Incremental Vertical completYon"
   :ensure t
-  :blackout t
   :leaf-defer nil
   :custom ((ivy-initial-inputs-alist . nil)
            (ivy-use-selectable-prompt . t))
@@ -91,7 +107,6 @@
     (leaf counsel
       :doc "Various completion functions using Ivy"
       :ensure t
-      :blackout t
       :bind (("C-S-s" . counsel-imenu)
              ("C-x C-r" . counsel-recentf))
       :custom `((counsel-yank-pop-separator . "\n----------\n")
@@ -127,7 +142,6 @@
 (leaf company
   :doc "Modular text completion framework"
   :ensure t
-  :blackout t
   :leaf-defer nil
   :bind ((company-active-map
           ("M-n" . nil)
