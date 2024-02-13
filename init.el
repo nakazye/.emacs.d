@@ -38,7 +38,8 @@
     '(progn
        (require 'skk)
        (require 'skk-study)
-       (require 'skk-hint))))
+       (require 'skk-hint)
+       (require 'facemenu))))
 
 ;;; --------------------------------------
 

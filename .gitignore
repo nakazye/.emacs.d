@@ -9,5 +9,6 @@ var/
 jdee-server/
 url/
 straight/
+eln-cache/
 auto-save-list/
 backup/
