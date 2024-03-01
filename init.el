@@ -25,21 +25,28 @@
 
 ;;; --------------------------------------
 
-(leaf skk
-  :doc "IME"
-  :ensure ddskk
-  :require t skk-study skk-hint
-  :bind (("C-x j" . skk-auto-fill-mode)))
-(prog1 'skk
-  (autoload (function skk-auto-fill-mode) "skk" nil t)
-  (leaf-handler-package skk ddskk nil)
-  (leaf-keys (("C-x j" . skk-auto-fill-mode)))
-  (eval-after-load 'skk
-    '(progn
-       (require 'skk)
-       (require 'skk-study)
-       (require 'skk-hint)
-       (require 'facemenu))))
+(leaf ddskk
+  :ensure t
+  :bind ("C-x j" . skk-mode)
+  :custom
+  (default-input-method . "japanese-skk")
+  (skk-preload . t)
+  (skk-jisyo-code . 'utf-8)
+  (skk-server-host . "localhost")
+  (skk-server-portnum . 1178)
+  (skk-server-report-response . t)
+  (skk-share-private-jisyo . t)
+  (skk-inhibit-ja-dic-search . t)
+  (skk-sticky-key . ";")
+  (skk-egg-like-newline . t)
+  (skk-verbose . t)
+  (skk-delete-implies-kakutei . nil)
+  (skk-use-numeric-conversion . t)
+  (skk-japanese-message-and-error . t)
+  (skk-auto-insert-paren . t)
+  (skk-check-okurigana-on-touroku . t)
+  (skk-show-tooltip . nil)
+  (skk-isearch-start-mode . 'latin))
 
 ;;; --------------------------------------
 
