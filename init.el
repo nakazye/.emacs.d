@@ -100,42 +100,43 @@
 
 ;;; --------------------------------------
 
-(leaf ivy
-  :doc "Incremental Vertical completYon"
+(leaf vertico
+  :tag "minibuffer UI"
   :ensure t
-  :leaf-defer nil
-  :custom ((ivy-initial-inputs-alist . nil)
-           (ivy-use-selectable-prompt . t))
-  :global-minor-mode t
+  :bind
+  (:vertico-map
+   ("C-r" . vertico-previous)
+   ("C-s" . vertico-next))
+  :custom (vertico-count . 10)
+  :hook (after-init-hook . vertico-mode)
   :config
-  (leaf swiper
-    :doc "Isearch with an overview. Oh, man!"
+  (leaf consult
+    :tag "completion command"
     :ensure t
-    :bind (("C-s" . swiper))
-    :config
-    (leaf counsel
-      :doc "Various completion functions using Ivy"
-      :ensure t
-      :bind (("C-S-s" . counsel-imenu)
-             ("C-x C-r" . counsel-recentf))
-      :custom `((counsel-yank-pop-separator . "\n----------\n")
-		(counsel-find-file-ignore-regexp . ,(rx-to-string '(or "./" "../") 'no-group)))
-      :global-minor-mode t)))
-
-;;; --------------------------------------
-
-(leaf prescient
-  :doc "Better sorting and filtering"
-  :ensure t
-  :custom ((prescient-aggressive-file-save . t))
-  :global-minor-mode prescient-persist-mode
-  :config
-  (leaf ivy-prescient
-    :doc "prescient.el + Ivy"
+    :package t
+    :bind
+    (
+     ("C-s" . consult-line)
+     ("C-x C-b" . switch-to-buffer)))
+  (leaf orderless
+    :tag "completion style"
     :ensure t
-    :after prescient ivy
-    :custom ((ivy-prescient-retain-classic-highlighting . t))
-    :global-minor-mode t))
+    :custom
+    `((completion-styles . '(orderless))
+      (orderless-matching-styles
+       . '(
+           ;; orderless-prefixes
+           ;; orderless-flex
+           orderless-regexp
+           ;; orderless-initialism
+	   ;; orderless-literal
+	   ))))
+  (leaf marginalia
+    :tag "minibuffer annotations"
+    :ensure t
+    :hook
+    (after-init-hook . marginalia-mode))
+  )
 
 ;;; --------------------------------------
 
@@ -208,8 +209,8 @@
 ;;; --------------------------------------
 
 (leaf lsp-java
-    :ensure t
-    :hook (java-mode-hook . (lambda () (lsp))))
+  :ensure t
+  :hook (java-mode-hook . (lambda () (lsp))))
 
 ;;; --------------------------------------
 
