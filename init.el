@@ -34,6 +34,7 @@
   (skk-jisyo-code . 'utf-8)
   (skk-server-host . "localhost")
   (skk-server-portnum . 1178)
+  (skk-user-directory . "~/.emacs.d/ddskk")
   (skk-server-report-response . t)
   (skk-share-private-jisyo . t)
   (skk-inhibit-ja-dic-search . t)
@@ -204,6 +205,13 @@
     (org-journal-file-format . "journal-%Y%m.org"))
   )
 
+;;; --------------------------------------
+
+(leaf lsp-java
+    :ensure t
+    :hook (java-mode-hook . (lambda () (lsp))))
+
+;;; --------------------------------------
 
 (provide 'init)
 
