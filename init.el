@@ -108,7 +108,9 @@
    ("C-r" . vertico-previous)
    ("C-s" . vertico-next))
   :custom (vertico-count . 10)
-  :hook (after-init-hook . vertico-mode)
+  :hook
+  (after-init-hook . vertico-mode)
+  (after-init-hook . marginalia-mode)
   :config
   (leaf consult
     :tag "completion command"
@@ -133,9 +135,7 @@
 	   ))))
   (leaf marginalia
     :tag "minibuffer annotations"
-    :ensure t
-    :hook
-    (after-init-hook . marginalia-mode))
+    :ensure t)
   )
 
 ;;; --------------------------------------
