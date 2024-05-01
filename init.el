@@ -19,9 +19,9 @@
 
 (leaf font-setting
   :doc "font setting"
-  :when (member "Myrica M" (font-family-list))
+  :when (member "Cica" (font-family-list))
   :config
-  (add-to-list 'default-frame-alist '(font . "Myrica M-16")))
+  (add-to-list 'default-frame-alist '(font . "Cica-16")))
 
 ;;; --------------------------------------
 
